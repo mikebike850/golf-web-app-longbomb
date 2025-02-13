@@ -1,0 +1,61 @@
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 15px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px; /* Ensures enough height for links */
+    z-index: 1000;
+  }  
+  
+  
+  .nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-links li {
+    display: inline-block;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px; /* Adds space around the text */
+    transition: color 0.3s;
+    display: inline-block; /* Ensures proper spacing */
+  }  
+  
+  .nav-links a:hover {
+    color: #f4d03f;
+  }
+  
+  .nav-links {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end; /* Pushes links to the right */
+    align-items: center; /* Ensures text is centered properly */
+    gap: 20px; /* Adds spacing between links */
+    padding-right: 20px; /* Adds space to the right side */
+  }  
+  
+  /* Fix content positioning so it doesn't overlap with the fixed navbar */
+  body {
+    padding-top: 60px; /* Pushes content down to avoid overlap */
+  }
+  
