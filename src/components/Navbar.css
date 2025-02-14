@@ -16,7 +16,7 @@
 /* Navbar Logo */
 .nav-logo {
   font-size: 22px;
-  color: white !important; /* ✅ Forces White Text */
+  color: white !important; /* ✅ Ensures White Text */
   font-weight: bold;
   text-decoration: none;
 }
@@ -24,28 +24,40 @@
 /* Navbar Links */
 .nav-links {
   display: flex;
-  gap: 20px; /* ✅ Adds More Space Between Items */
+  gap: 20px !important; /* ✅ Ensures proper spacing */
   align-items: center;
-  flex-wrap: nowrap; /* ✅ Prevents Wrapping */
-  justify-content: center;
+  flex-wrap: nowrap !important; /* ✅ Prevents wrapping */
+  justify-content: space-between !important; /* ✅ Spreads links evenly */
   max-width: 100%;
   overflow: visible;
+  padding-right: 50px !important; /* ✅ Adds space to the right */
 }
 
-/* Individual Nav Items */
-.nav-item {
-  padding: 12px 18px;
-  color: white !important; /* ✅ Forces White Text */
-  text-decoration: none !important; /* ✅ Ensures No Default Blue */
+/* Ensure Navbar Links Stay White */
+.nav-item,
+.nav-item:visited,
+.nav-item:active,
+.nav-item:focus,
+.navbar a {
+  color: white !important; /* 🔥 Forces white text */
+  text-decoration: none !important; /* 🔥 Removes blue underline */
   font-size: 18px;
   font-weight: bold;
   white-space: nowrap;
-  display: inline-block; /* ✅ Ensures Correct Spacing */
+  display: inline-block;
 }
 
-/* Fix Hover Effect */
-.nav-item:hover {
-  color: #ffcc00 !important; /* ✅ Ensures Hover Effect */
+/* Ensure Hover Effect */
+.nav-item:hover,
+.navbar a:hover {
+  color: #ffcc00 !important; /* 🔥 Changes to gold on hover */
+}
+
+
+
+/* Fixing "Sign Up" Cut-Off */
+.nav-links .nav-item:last-child {
+  margin-right: 50px !important; /* ✅ Adds Space to the Right */
 }
 
 /* Logout Button */
@@ -64,12 +76,7 @@
   background-color: darkred !important;
 }
 
-/* Fixing "Sign Up" Cut-Off */
-.nav-links .nav-item:last-child {
-  margin-right: 40px !important; /* ✅ Adds Space to the Right */
-}
-
-/* Final Fix for Mobile View */
+/* Mobile View Fix */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
