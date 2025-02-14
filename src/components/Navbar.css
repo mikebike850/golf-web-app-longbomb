@@ -1,4 +1,3 @@
-/* Navbar Styling */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -9,53 +8,57 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 60px; /* Ensures enough height for links */
+    height: 75px;
     z-index: 1000;
-  }  
-  
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  }
   
   .nav-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
     color: white;
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
   }
-
+  
   .nav-links {
     list-style: none;
     display: flex;
     gap: 20px;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .nav-links li {
-    display: inline-block;
   }
   
   .nav-links a {
-    text-decoration: none;
     color: white;
-    font-size: 1.2rem;
-    padding: 10px 20px; /* Adds space around the text */
-    transition: color 0.3s;
-    display: inline-block; /* Ensures proper spacing */
-  }  
-  
-  .nav-links a:hover {
-    color: #f4d03f;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
   }
   
-  .nav-links {
-    flex-grow: 1;
-    display: flex;
-    justify-content: flex-end; /* Pushes links to the right */
-    align-items: center; /* Ensures text is centered properly */
-    gap: 20px; /* Adds spacing between links */
-    padding-right: 20px; /* Adds space to the right side */
-  }  
+  .nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+  }
+  
+  .logout-btn {
+    padding: 8px 15px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    transition: all 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: darkred;
+  }
+  
   
   /* Fix content positioning so it doesn't overlap with the fixed navbar */
   body {
-    padding-top: 60px; /* Pushes content down to avoid overlap */
+    padding-top: 70px;
   }
+  
   

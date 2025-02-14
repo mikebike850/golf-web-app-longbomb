@@ -1,0 +1,67 @@
+/* Matches layout with the main page */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Makes sure the form takes up the full height */
+  padding-top: 0px; /* No extra padding needed since it's centered */
+}
+
+
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.form-container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.form-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white; /* Ensures all inputs are white */
+  color: black; /* Ensures text is always black */
+  box-sizing: border-box;
+}
+
+
+.form-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #333; /* Dark gray background */
+  color: white; /* White text */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.form-container button:hover {
+  background-color: #f4d03f; /* Gold on hover */
+}
+
+
+
+.form-container button:hover {
+  background-color: #f4d03f;
+}
+
+.error-message {
+  color: red;
+}
