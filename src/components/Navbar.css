@@ -1,92 +1,99 @@
+/* Navbar Container */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    padding: 15px 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 75px;
-    z-index: 1000;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-  }
-  
-  .nav-logo {
-    color: white;
-    font-size: 22px;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 10px;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .nav-links a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
-  }
-  
-  .logout-btn {
-    padding: 8px 15px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    background-color: red;
-    color: white;
-    border-radius: 5px;
-    transition: all 0.3s;
-  }
-  
-  .logout-btn:hover {
-    background-color: darkred;
-  }
-  
-  
-  /* Fix content positioning so it doesn't overlap with the fixed navbar */
-  body {
-    padding-top: 70px;
-  }
-  
-  /* Responsive Navbar for Mobile */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #333 !important; /* ✅ Ensures Dark Background */
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Navbar Logo */
+.nav-logo {
+  font-size: 22px;
+  color: white !important; /* ✅ Forces White Text */
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Navbar Links */
+.nav-links {
+  display: flex;
+  gap: 20px; /* ✅ Adds More Space Between Items */
+  align-items: center;
+  flex-wrap: nowrap; /* ✅ Prevents Wrapping */
+  justify-content: center;
+  max-width: 100%;
+  overflow: visible;
+}
+
+/* Individual Nav Items */
+.nav-item {
+  padding: 12px 18px;
+  color: white !important; /* ✅ Forces White Text */
+  text-decoration: none !important; /* ✅ Ensures No Default Blue */
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  display: inline-block; /* ✅ Ensures Correct Spacing */
+}
+
+/* Fix Hover Effect */
+.nav-item:hover {
+  color: #ffcc00 !important; /* ✅ Ensures Hover Effect */
+}
+
+/* Logout Button */
+.logout-button {
+  background-color: red !important; /* ✅ Ensures Correct Button Color */
+  color: white !important;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: darkred !important;
+}
+
+/* Fixing "Sign Up" Cut-Off */
+.nav-links .nav-item:last-child {
+  margin-right: 40px !important; /* ✅ Adds Space to the Right */
+}
+
+/* Final Fix for Mobile View */
 @media (max-width: 768px) {
-    .navbar {
-      flex-direction: column;  /* ✅ Stacks items vertically */
-      align-items: center;
-      height: auto;
-      padding: 10px;
-    }
-  
-    .nav-links {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-  
-    .nav-links a {
-      padding: 10px;
-      font-size: 16px;
-      text-align: center;
-      width: 100%;
-    }
-  
-    .logout-button {
-      width: 100%;
-      text-align: center;
-      margin-top: 10px;
-    }
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    height: auto;
   }
-  
+
+  .nav-links {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .nav-item {
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .logout-button {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
