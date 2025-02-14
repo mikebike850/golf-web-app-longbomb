@@ -84,4 +84,35 @@
     }
   }
   
+/* Responsive Design for Mobile Screens */
+@media (max-width: 768px) {
+    .profile-container {
+      max-width: 90%;  /* ✅ Ensures the container fits on smaller screens */
+      margin: 20px auto;
+      padding: 15px;
+    }
+  
+    .profile-title {
+      font-size: 20px;  /* ✅ Slightly smaller title for mobile */
+    }
+  
+    .profile-info {
+      padding: 15px;
+    }
+  
+    input {
+      width: 100%;  /* ✅ Makes input fields responsive */
+      font-size: 14px;
+    }
+  
+    button {
+      width: 100%;  /* ✅ Makes buttons stretch properly on mobile */
+      font-size: 14px;
+    }
+  
+    .avatar {
+      width: 100px;
+      height: 100px;
+    }
+  }
   

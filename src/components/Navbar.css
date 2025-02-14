@@ -61,4 +61,32 @@
     padding-top: 70px;
   }
   
+  /* Responsive Navbar for Mobile */
+@media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;  /* ✅ Stacks items vertically */
+      align-items: center;
+      height: auto;
+      padding: 10px;
+    }
+  
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .nav-links a {
+      padding: 10px;
+      font-size: 16px;
+      text-align: center;
+      width: 100%;
+    }
+  
+    .logout-button {
+      width: 100%;
+      text-align: center;
+      margin-top: 10px;
+    }
+  }
   
