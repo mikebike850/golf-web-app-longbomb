@@ -4,6 +4,8 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
 import "./Profile.css";
 
+
+
 function Profile() {
   const { currentUser } = useAuth();
   const [userData, setUserData] = useState(null);
