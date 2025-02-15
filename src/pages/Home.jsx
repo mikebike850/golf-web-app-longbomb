@@ -1,21 +1,19 @@
 import React from "react";
-import "./Home.css"; // Ensure this file exists!
+import "./Home.css";
 
 function Home() {
   return (
     <div className="home-container">
-      {/* 🔹 DEBUG: Force text to appear */}
-      <h1>Welcome to The Long Bomb Cup Web App</h1>
+      <h1 className="page-title">🏡 Welcome to The Long Bomb Cup Web App</h1>
       <p>
-        This is the central hub for everything related to our golf trip! Track scores,
-        challenge friends, and stay updated with the latest event info.
+        This is your central hub for our annual golf trip! Here you can view the countdown
+        to our next outing, check the latest scores and challenges, and connect with fellow participants.
+        Nate and Matt are going down. 
       </p>
-
-      {/* 🔹 Add Some Buttons for Navigation */}
-      <div className="home-buttons">
-        <button onClick={() => (window.location.href = "/scores")}>View Scores</button>
-        <button onClick={() => (window.location.href = "/challenges")}>View Challenges</button>
-      </div>
+      <p>
+        Explore the features, join in on the challenges, and enjoy staying updated on everything
+        related to the Long Bomb Cup.
+      </p>
     </div>
   );
 }
