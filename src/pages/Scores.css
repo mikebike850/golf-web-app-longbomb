@@ -1,0 +1,11 @@
+.page-container {
+    text-align: center;
+    padding: 20px;
+    margin-top: 80px; /* Push content below navbar */
+  }
+  
+  .page-title {
+    font-size: 28px;
+    color: #333;
+  }
+  

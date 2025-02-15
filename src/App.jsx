@@ -1,45 +1,24 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom"; // ✅ No Router Here
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import SignUp from "./components/SignUp";
-import Login from "./components/Login";
-import PasswordReset from "./components/PasswordReset";
-import ProtectedRoute from "./components/ProtectedRoute";
+import Home from "./pages/Home";
+import Scores from "./pages/Scores";
+import Challenges from "./pages/Challenges";
 import Profile from "./components/Profile";
-
-function Home() {
-  return <h1>🏡 Home Page - Welcome to The Long Bomb Cup Web App</h1>;
-}
-
-function Scores() {
-  return <h1>⛳ Scores Page - Track Your Golf Scores</h1>;
-}
-
-function Challenges() {
-  return <h1>🏆 Challenges Page - Compete with Friends</h1>;
-}
-
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <div>
+    <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/scores" element={<Scores />} />
-        <Route path="/challenges" element={<Challenges />} />
-        <Route path="/profile" element={
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
-        } />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/password-reset" element={<PasswordReset />} />
-      </Routes>
-      <Footer />
-    </div>
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/scores" element={<Scores />} />
+          <Route path="/challenges" element={<Challenges />} />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        </Routes>
+      </div>
+    </>
   );
 }
 

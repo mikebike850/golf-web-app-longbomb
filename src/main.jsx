@@ -1,19 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { AuthProvider } from "./context/AuthContext";
-import "./index.css";
+import { AuthProvider } from "./context/AuthContext"; // ✅ Wraps App inside AuthProvider
+import { BrowserRouter as Router } from "react-router-dom"; // ✅ Router should ONLY be here
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <AuthProvider>
-    <BrowserRouter
-      future={{ 
-        v7_startTransition: true, 
-        v7_relativeSplatPath: true 
-      }}
-    >
-      <App />
-    </BrowserRouter>
-  </AuthProvider>
+  <React.StrictMode>
+    <AuthProvider>
+      <Router> {/* ✅ Router should only be here */}
+        <App />
+      </Router>
+    </AuthProvider>
+  </React.StrictMode>
 );
