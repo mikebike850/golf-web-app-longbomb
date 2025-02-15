@@ -1,11 +1,21 @@
 import React from "react";
-import "./Home.css";
+import "./Home.css"; // Ensure this file exists!
 
 function Home() {
   return (
-    <div className="page-container">
-      <h1 className="page-title">🏡 Welcome to The Long Bomb Cup Web App</h1>
-      <p>This is the central hub for all things related to the Long Bomb Cup.</p>
+    <div className="home-container">
+      {/* 🔹 DEBUG: Force text to appear */}
+      <h1>Welcome to The Long Bomb Cup Web App</h1>
+      <p>
+        This is the central hub for everything related to our golf trip! Track scores,
+        challenge friends, and stay updated with the latest event info.
+      </p>
+
+      {/* 🔹 Add Some Buttons for Navigation */}
+      <div className="home-buttons">
+        <button onClick={() => (window.location.href = "/scores")}>View Scores</button>
+        <button onClick={() => (window.location.href = "/challenges")}>View Challenges</button>
+      </div>
     </div>
   );
 }
