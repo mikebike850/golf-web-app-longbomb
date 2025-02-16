@@ -3,7 +3,7 @@ import { auth, db, storage } from "../config/firebaseConfig";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useAuth } from "../context/AuthContext";
-import "./Profile.css";
+import "./Profile.css";  // Ensure Profile.css is in the same folder (src/pages/Profile.css)
 
 function Profile() {
   const { currentUser } = useAuth();
