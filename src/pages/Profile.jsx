@@ -3,7 +3,7 @@ import { auth, db, storage } from "../config/firebaseConfig";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useAuth } from "../context/AuthContext";
-import "./Profile.css";  // Ensure Profile.css is in the same folder (src/pages/Profile.css)
+import "./Profile.css";
 
 function Profile() {
   const { currentUser } = useAuth();
@@ -72,9 +72,9 @@ function Profile() {
     <div className="profile-container">
       <h2 className="profile-title">Profile</h2>
       {userData ? (
-        <div className="profile-info">
-          {editing ? (
-            <>
+        editing ? (
+          <div className="profile-edit">
+            <div className="profile-info-top">
               <img src={avatar} alt="Profile Avatar" className="avatar" />
               <input
                 type="file"
@@ -92,16 +92,23 @@ function Profile() {
                 onChange={(e) => setHandicap(e.target.value)}
                 placeholder="Handicap"
               />
+            </div>
+            <div className="about-me-section">
+              <h3>About Me</h3>
               <textarea
                 value={aboutMe}
                 onChange={(e) => setAboutMe(e.target.value)}
-                placeholder="About Me"
+                placeholder="Tell us about yourself"
               ></textarea>
+            </div>
+            <div className="profile-edit-buttons">
               <button onClick={handleUpdate}>Save</button>
               <button onClick={() => setEditing(false)}>Cancel</button>
-            </>
-          ) : (
-            <>
+            </div>
+          </div>
+        ) : (
+          <div className="profile-view">
+            <div className="profile-info-top">
               <img src={avatar} alt="Profile Avatar" className="avatar" />
               <p>
                 <strong>Name:</strong> {fullName || "Not Set"}
@@ -112,13 +119,14 @@ function Profile() {
               <p>
                 <strong>Handicap:</strong> {handicap || "Not Set"}
               </p>
-              <p>
-                <strong>About Me:</strong> {aboutMe || "Not Set"}
-              </p>
-              <button onClick={() => setEditing(true)}>Edit Profile</button>
-            </>
-          )}
-        </div>
+            </div>
+            <div className="about-me-section">
+              <h3>About Me</h3>
+              <p>{aboutMe || "Not Set"}</p>
+            </div>
+            <button onClick={() => setEditing(true)}>Edit Profile</button>
+          </div>
+        )
       ) : (
         <p>Loading profile...</p>
       )}
