@@ -1,3 +1,4 @@
+console.log("Weather API Key:", import.meta.env.VITE_WEATHER_API_KEY);
 import React, { useState, useEffect } from "react";
 import "./WeatherWidget.css";
 
