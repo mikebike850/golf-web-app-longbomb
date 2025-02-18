@@ -3,8 +3,15 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/", // ✅ Ensures correct routing on Vercel
+  base: "/",
   server: {
     port: 5173,
-  }
+    proxy: {
+      "/api": {
+        target: "https://api.weatherapi.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 });

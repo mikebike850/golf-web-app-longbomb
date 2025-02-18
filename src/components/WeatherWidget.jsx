@@ -1,63 +1,40 @@
-import React, { useState, useEffect } from "react";
-import "./WeatherWidget.css";
+import React, { useState } from "react";
+import "./WeatherWidget.css"; // Import the CSS file
 
 function WeatherWidget() {
+  const [location, setLocation] = useState("");
   const [weather, setWeather] = useState(null);
-  const [city, setCity] = useState("London"); // Default city
-  const [error, setError] = useState(null);
 
-  const fetchWeather = async (cityName) => {
-    try {
-      const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Error fetching weather data");
-      }
-      const data = await response.json();
-      setWeather(data);
-      setError(null);
-    } catch (err) {
-      setError(err.message);
-      setWeather(null);
-    }
-  };
-
-  useEffect(() => {
-    fetchWeather(city);
-  }, []);
-
-  const handleCityChange = (e) => {
-    setCity(e.target.value);
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value);
   };
 
   const handleSearch = () => {
-    fetchWeather(city);
+    // Fetch weather data for the entered location using the proxy
+    fetch(`/api/v1/current.json?key=YOUR_API_KEY&q=${location}`)
+      .then((response) => response.json())
+      .then((data) => setWeather(data))
+      .catch((error) => console.error("Error fetching weather data:", error));
   };
 
   return (
     <div className="weather-widget">
-      <div className="weather-search">
-        <label htmlFor="city-input" className="weather-label">Location:</label>
-        <input
-          id="city-input"
-          type="text"
-          value={city}
-          onChange={handleCityChange}
-          placeholder="Enter city"
-        />
-        <button onClick={handleSearch}>Search</button>
-      </div>
-      {error && <p className="error-message">Error: {error}</p>}
-      {weather ? (
-        <>
-          <h3>Weather in {weather.name}</h3>
-          <p>{weather.weather[0].description}</p>
-          <p>Temp: {weather.main.temp}°F</p>
-          <p>Humidity: {weather.main.humidity}%</p>
-        </>
-      ) : (
-        !error && <p>Loading weather...</p>
+      <input
+        type="text"
+        value={location}
+        onChange={handleLocationChange}
+        placeholder="Enter location"
+        className="weather-input"
+      />
+      <button onClick={handleSearch} className="weather-button">
+        Search
+      </button>
+      {weather && (
+        <div className="weather-info">
+          <h3>{weather.location.name}</h3>
+          <p>{weather.current.temp_c}°C</p>
+          <p>{weather.current.condition.text}</p>
+        </div>
       )}
     </div>
   );

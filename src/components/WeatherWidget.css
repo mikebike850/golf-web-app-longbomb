@@ -1,54 +1,33 @@
 .weather-widget {
-    position: absolute;
-    top: 140px; /* Positioned below the countdown widget */
-    right: 10px;
-    width: 200px;
-    background-color: #f0f0f0;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 9000;
-  }
-  
-  .weather-widget h3 {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 5px;
-  }
-  
-  .weather-widget p {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .weather-search {
-    margin-bottom: 5px;
-  }
-  
-  .weather-label {
-    display: block;
-    font-size: 0.9rem;
-    color: #333;
-    margin-bottom: 2px;
-  }
-  
-  .weather-search input {
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .weather-search button {
-    width: 100%;
-    padding: 5px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%; /* Adjust width to fit the container */
+  max-width: 600px; /* Set a max-width for better responsiveness */
+  margin: 20px auto; /* Add margin for spacing */
+}
+
+.weather-input {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%; /* Adjust width to fit the container */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.weather-button {
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.weather-info {
+  margin-top: 20px;
+  text-align: center;
+}

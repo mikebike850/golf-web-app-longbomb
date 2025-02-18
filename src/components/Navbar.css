@@ -1,6 +1,7 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+  padding: 0 20px; /* Add padding to the navbar */
   align-items: center;
   padding: 4px 10px; /* Reduced horizontal padding */
   background-color: #222;
@@ -12,6 +13,22 @@
   height: 70px; /* Fixed height */
   z-index: 10000; /* Very high z-index so navbar is always on top */
   font-family: "Helvetica Neue", Arial, sans-serif;
+}
+.navbar-list {
+  list-style: none;
+  display: flex;
+  gap: 20px; /* Add gap between navbar items */
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-item {
+  padding: 10px 15px; /* Add padding to each navbar item */
+}
+
+.navbar-item a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .nav-logo a {

@@ -1,3 +1,11 @@
+iken/OneDrive/Desktop/golf-web-app-longbomb/src/App.css */
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
