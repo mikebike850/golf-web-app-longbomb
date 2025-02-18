@@ -1,57 +1,59 @@
-/* Home Page Container */
-.home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+/* Home.css */
+
+/* Overall Home Page */
+.home-page {
   width: 100%;
-  height: 100vh;
-  padding: 20px;
-  background: url('/Background.jpg') no-repeat center center/cover;
+  min-height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  padding-top: 70px; /* Extra space so the fixed navbar doesn't hide content */
+}
+
+/* Top Section: Contains the background carousel and widgets */
+.home-top {
+  position: relative;
+  height: 33vh;  /* Top one-third of the page on desktop */
   overflow: hidden;
 }
 
-/* Page Title */
-.page-title {
-  font-size: 2rem;
-  font-weight: bold;
-  line-height: 1.4;
-  max-width: 90%;
-  word-wrap: break-word;
-  color: white;  /* Change text color for contrast */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add shadow for readability */
-  margin-bottom: 15px;
+/* Bottom Section: White background for the Message Board */
+.home-bottom {
+  background-color: #ffffff;
+  padding: 20px;
 }
 
-/* Paragraph Text */
-.home-container p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  max-width: 90%;
-  word-wrap: break-word;
-  color: white; /* Change text color for contrast */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+/* Description Overlay within Top Section */
+.home-description {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0.8);
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
+  max-width: 60%;
+  z-index: 15;
 }
 
-/* Mobile-Specific Fixes */
+.home-description h2 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.home-description p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Mobile adjustments */
 @media (max-width: 768px) {
-  .home-container {
-    padding: 15px;
-    height: 100vh;
+  .home-top {
+    height: 40vh; /* Increase height on mobile */
   }
-  .page-title {
-    font-size: 1.5rem;
-    max-width: 100%;
-    word-wrap: break-word;
-  }
-  .home-container p {
-    font-size: 1rem;
-    line-height: 1.5;
-    max-width: 100%;
-    word-wrap: break-word;
+  .home-description {
+    max-width: 90%;
+    left: 5%;
+    right: 5%;
   }
 }
 

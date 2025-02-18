@@ -3,18 +3,16 @@ import "./WeatherWidget.css";
 
 function WeatherWidget() {
   const [weather, setWeather] = useState(null);
-  const [city, setCity] = useState("Atlanta"); // Default city
+  const [city, setCity] = useState("London"); // Default city
   const [error, setError] = useState(null);
 
   const fetchWeather = async (cityName) => {
     try {
       const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
-      // Change units to imperial for Fahrenheit
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
       const response = await fetch(url);
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Error fetching weather data");
+        throw new Error("Error fetching weather data");
       }
       const data = await response.json();
       setWeather(data);
@@ -40,7 +38,9 @@ function WeatherWidget() {
   return (
     <div className="weather-widget">
       <div className="weather-search">
+        <label htmlFor="city-input" style={{ fontSize: "0.9rem", color: "#333" }}>Location:</label>
         <input 
+          id="city-input"
           type="text"
           value={city}
           onChange={handleCityChange}
