@@ -38,8 +38,8 @@ function WeatherWidget() {
   return (
     <div className="weather-widget">
       <div className="weather-search">
-        <label htmlFor="city-input" style={{ fontSize: "0.9rem", color: "#333" }}>Location:</label>
-        <input 
+        <label htmlFor="city-input" className="weather-label">Location:</label>
+        <input
           id="city-input"
           type="text"
           value={city}

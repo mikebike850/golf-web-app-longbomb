@@ -1,14 +1,14 @@
 .weather-widget {
     position: absolute;
-    top: 60px; /* Positioned 60px from the top so it appears below the countdown widget */
+    top: 140px; /* Positioned below the countdown widget */
     right: 10px;
     width: 200px;
     background-color: #f0f0f0;
     border-radius: 8px;
     padding: 10px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    z-index: 20;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 9000;
   }
   
   .weather-widget h3 {
@@ -20,6 +20,17 @@
   .weather-widget p {
     font-size: 14px;
     color: #555;
+  }
+  
+  .weather-search {
+    margin-bottom: 5px;
+  }
+  
+  .weather-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 2px;
   }
   
   .weather-search input {

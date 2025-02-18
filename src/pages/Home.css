@@ -6,23 +6,16 @@
   min-height: 100vh;
   overflow-y: auto;
   position: relative;
-  padding-top: 70px; /* Extra space so the fixed navbar doesn't hide content */
+  padding-top: 75px; /* This might be overridden by the Layout's content padding */
 }
 
-/* Top Section: Contains the background carousel and widgets */
+/* Top Section: Background carousel with description overlay */
 .home-top {
   position: relative;
-  height: 33vh;  /* Top one-third of the page on desktop */
+  height: 33vh;
   overflow: hidden;
 }
 
-/* Bottom Section: White background for the Message Board */
-.home-bottom {
-  background-color: #ffffff;
-  padding: 20px;
-}
-
-/* Description Overlay within Top Section */
 .home-description {
   position: absolute;
   bottom: 10px;
@@ -45,10 +38,16 @@
   color: #555;
 }
 
+/* Bottom Section: Message Board */
+.home-bottom {
+  background-color: #ffffff;
+  padding: 20px;
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .home-top {
-    height: 40vh; /* Increase height on mobile */
+    height: 40vh;
   }
   .home-description {
     max-width: 90%;

@@ -1,0 +1,4 @@
+.content-container {
+    padding-top: 120px; /* Ensure all page content is pushed below fixed elements */
+  }
+  

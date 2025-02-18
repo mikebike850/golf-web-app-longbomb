@@ -1,14 +1,14 @@
 .countdown-widget {
     position: absolute;
-    top: 10px;   /* 10px from the top of the top section */
-    right: 10px; /* 10px from the right */
+    top: 80px;  /* Moved down to 80px to clear a 70px navbar plus a 10px gap */
+    right: 10px;
     width: 200px;
     background-color: #f0f0f0;
     border-radius: 8px;
     padding: 10px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    z-index: 9999;  /* Increased z-index to ensure visibility */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 9999;  /* Very high to ensure visibility */
   }
   
   .countdown-widget h3 {
@@ -20,5 +20,6 @@
   .countdown-widget p {
     font-size: 14px;
     color: #555;
+    font-weight: bold; /* Bold the countdown text */
   }
   

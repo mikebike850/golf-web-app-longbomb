@@ -1,125 +1,175 @@
 import React, { useState, useEffect } from "react";
-import { collection, query, where, orderBy, onSnapshot, addDoc, serverTimestamp, updateDoc, doc } from "firebase/firestore";
+import { collection, query, where, orderBy, onSnapshot, addDoc, serverTimestamp, updateDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 import { useAuth } from "../context/AuthContext";
 import "./Scores.css";
 
 function Scores() {
   const { currentUser } = useAuth();
-  const [score, setScore] = useState("");
-  const [par, setPar] = useState("");
-  const [scores, setScores] = useState([]);
-  const [handicap, setHandicap] = useState(null);
+  
+  // State for current user's scores and calculated handicap
+  const [myScores, setMyScores] = useState([]);
+  const [myHandicap, setMyHandicap] = useState(null);
 
-  // Fetch scores for the current user from Firestore
+  // State for other users' latest scores and their handicaps
+  const [otherScores, setOtherScores] = useState([]);  // Array of score objects from other users
+  const [otherHandicaps, setOtherHandicaps] = useState({}); // Map: userId -> Handicap
+
+  // --- Query current user's scores ---
   useEffect(() => {
-    if (currentUser) {
-      const scoresQuery = query(
-        collection(db, "scores"),
-        where("userId", "==", currentUser.uid),
-        orderBy("timestamp", "desc")
-      );
-      const unsubscribe = onSnapshot(
-        scoresQuery,
-        (snapshot) => {
-          const scoresArray = snapshot.docs.map((docSnap) => ({
-            id: docSnap.id,
-            ...docSnap.data(),
-          }));
-          setScores(scoresArray);
-        },
-        (error) => {
-          console.error("Error fetching scores:", error);
-        }
-      );
-      return unsubscribe;
-    }
+    if (!currentUser) return;
+    const myScoresQuery = query(
+      collection(db, "scores"),
+      where("userId", "==", currentUser.uid),
+      orderBy("timestamp", "asc")
+    );
+    const unsubscribeMy = onSnapshot(myScoresQuery, (snapshot) => {
+      const scoresArray = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setMyScores(scoresArray);
+      
+      // Calculate handicap for current user if scores exist
+      if (scoresArray.length > 0) {
+        const differences = scoresArray.map((s) => s.score - s.par);
+        const avgDiff = differences.reduce((a, b) => a + b, 0) / differences.length;
+        const calculatedHandicap = (avgDiff * 0.8).toFixed(2);
+        setMyHandicap(calculatedHandicap);
+        // Update the user's document in "users" collection
+        updateDoc(doc(db, "users", currentUser.uid), { Handicap: calculatedHandicap }).catch(console.error);
+      } else {
+        setMyHandicap(null);
+      }
+    });
+    return () => unsubscribeMy();
   }, [currentUser]);
 
-  // Handle submission of a new score
+  // --- Query other users' scores ---
+  useEffect(() => {
+    if (!currentUser) return;
+    // Note: Firestore requires ordering when using "!=" queries.
+    // We'll order by userId first, then by timestamp descending.
+    const otherScoresQuery = query(
+      collection(db, "scores"),
+      where("userId", "!=", currentUser.uid),
+      orderBy("userId"),
+      orderBy("timestamp", "desc")
+    );
+    const unsubscribeOther = onSnapshot(otherScoresQuery, (snapshot) => {
+      const allScores = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      // Group by userId: for each other user, take the first (latest) entry.
+      const grouped = {};
+      allScores.forEach((score) => {
+        if (!grouped[score.userId]) {
+          grouped[score.userId] = score;
+        }
+      });
+      setOtherScores(Object.values(grouped));
+    });
+    return () => unsubscribeOther();
+  }, [currentUser]);
+
+  // --- Fetch other users' handicap from "users" collection ---
+  useEffect(() => {
+    const fetchOtherHandicaps = async () => {
+      const handicaps = {};
+      await Promise.all(
+        otherScores.map(async (score) => {
+          try {
+            const userDoc = await getDoc(doc(db, "users", score.userId));
+            if (userDoc.exists()) {
+              handicaps[score.userId] = userDoc.data().Handicap || "N/A";
+            } else {
+              handicaps[score.userId] = "N/A";
+            }
+          } catch (error) {
+            console.error("Error fetching handicap for user:", score.userId, error);
+            handicaps[score.userId] = "Error";
+          }
+        })
+      );
+      setOtherHandicaps(handicaps);
+    };
+    if (otherScores.length > 0) {
+      fetchOtherHandicaps();
+    }
+  }, [otherScores]);
+
+  // --- Handle new score submission ---
+  const [newScore, setNewScore] = useState("");
+  const [newPar, setNewPar] = useState("");
   const handleScoreSubmit = async (e) => {
     e.preventDefault();
-    if (!score || !par) return;
+    if (!newScore || !newPar) return;
     try {
       await addDoc(collection(db, "scores"), {
         userId: currentUser.uid,
-        score: parseFloat(score),
-        par: parseFloat(par),
+        score: parseFloat(newScore),
+        par: parseFloat(newPar),
         timestamp: serverTimestamp(),
       });
-      setScore("");
-      setPar("");
+      setNewScore("");
+      setNewPar("");
+      // The useEffect above will update scores and recalculate handicap.
     } catch (error) {
       console.error("Error adding score:", error);
     }
   };
 
-  // Automatically calculate handicap when scores update and update user's profile
-  useEffect(() => {
-    if (scores.length === 0) {
-      setHandicap(null);
-      return;
-    }
-    // Calculate handicap using the differences (score - par)
-    const differences = scores.map((item) => item.score - item.par);
-    const avgDiff = differences.reduce((a, b) => a + b, 0) / differences.length;
-    const calcHandicap = avgDiff * 0.8; // Adjust this factor as needed
-    const newHandicap = calcHandicap.toFixed(2);
-    setHandicap(newHandicap);
-
-    // Update user's Handicap in Firestore
-    const updateUserHandicap = async () => {
-      try {
-        const userRef = doc(db, "users", currentUser.uid);
-        await updateDoc(userRef, { Handicap: newHandicap });
-      } catch (error) {
-        console.error("Error updating user's handicap:", error);
-      }
-    };
-
-    updateUserHandicap();
-  }, [scores, currentUser]);
-
   return (
     <div className="scores-container">
       <h1 className="page-title">🏌️ Scores & Handicap</h1>
+      
+      {/* Section A: Current User's Scores */}
+      <section className="my-scores">
+        <h2>My Scores</h2>
+        {myScores.length === 0 ? (
+          <p>No scores submitted yet.</p>
+        ) : (
+          <ul>
+            {myScores.map((score) => (
+              <li key={score.id}>
+                Score: {score.score}, Par: {score.par} –{" "}
+                {score.timestamp ? new Date(score.timestamp.seconds * 1000).toLocaleString() : "Just now"}
+              </li>
+            ))}
+          </ul>
+        )}
+        <p className="my-handicap">
+          {myHandicap !== null ? `My Calculated Handicap: ${myHandicap}` : "Handicap not available"}
+        </p>
+        <form onSubmit={handleScoreSubmit} className="score-form">
+          <input
+            type="number"
+            value={newScore}
+            onChange={(e) => setNewScore(e.target.value)}
+            placeholder="Enter your score"
+            required
+          />
+          <input
+            type="number"
+            value={newPar}
+            onChange={(e) => setNewPar(e.target.value)}
+            placeholder="Enter course par"
+            required
+          />
+          <button type="submit">Submit Score</button>
+        </form>
+      </section>
 
-      {/* Score Submission Section */}
-      <form onSubmit={handleScoreSubmit} className="score-form">
-        <input 
-          type="number" 
-          value={score} 
-          onChange={(e) => setScore(e.target.value)} 
-          placeholder="Enter your score" 
-          required
-        />
-        <input 
-          type="number" 
-          value={par} 
-          onChange={(e) => setPar(e.target.value)} 
-          placeholder="Enter course par" 
-          required
-        />
-        <button type="submit">Submit Score</button>
-      </form>
-
-      {/* Display Submitted Scores */}
-      <div className="scores-list">
-        {scores.map((item) => (
-          <div key={item.id} className="score-item">
-            <p>Score: {item.score}</p>
-            <p>Par: {item.par}</p>
-            <p>Date: {item.timestamp ? new Date(item.timestamp.seconds * 1000).toLocaleString() : "Just now"}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Display Calculated Handicap */}
-      {handicap !== null && (
-        <div className="handicap-result">
-          <p>Your calculated handicap is: {handicap}</p>
-        </div>
-      )}
+      {/* Section B: Other Users' Latest Scores & Handicaps */}
+      <section className="other-scores">
+        <h2>Other Users' Scores & Handicaps</h2>
+        {otherScores.length === 0 ? (
+          <p>No other user scores available.</p>
+        ) : (
+          <ul>
+            {otherScores.map((score) => (
+              <li key={score.id}>
+                User ID: {score.userId} – Latest Score: {score.score}, Par: {score.par} – Handicap: {otherHandicaps[score.userId] || "Loading..."}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   );
 }
