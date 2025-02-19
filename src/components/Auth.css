@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh; /* Makes sure the form takes up the full height */
-  padding-top: 0px; /* No extra padding needed since it's centered */
+  padding-top: 0px;
 }
 
 
@@ -58,9 +58,6 @@
 
 
 
-.form-container button:hover {
-  background-color: #f4d03f;
-}
 
 .error-message {
   color: red;

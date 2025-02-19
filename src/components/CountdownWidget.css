@@ -1,7 +1,5 @@
 .countdown-widget {
-  /* Change to relative to scroll with the page */
   position: relative;
-  /* Adjust this value based on the height of your navbar */
   width: 200px;
   background-color: #f0f0f0;
   border-radius: 8px;
@@ -9,8 +7,7 @@
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 10;  /* Reasonable value to ensure visibility */
-  /* Remove bottom margin */
-  margin-bottom: 0;
+  margin-bottom: 0;  /* Remove bottom margin */
 }
 
 .countdown-widget h3 {

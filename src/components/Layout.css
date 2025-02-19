@@ -1,4 +1,26 @@
+:root {
+  --widget-top: 200px; /* Adjust this value based on the height of your navbar and carousel */
+  --widget-right: 20px; /* Adjust this value to position the widgets on the right side */
+  --widget-gap: 10px; /* Add gap between widgets */
+}
+
+.widgets-container {
+  position: absolute;
+  top: var(--widget-top);
+  right: var(--widget-right);
+  display: flex;
+  flex-direction: column;
+  gap: var(--widget-gap);
+}
 .content-container {
-    padding-top: 120px; /* Ensure all page content is pushed below fixed elements */
-  }
-  
+  margin-top: 250px; /* Adjust this value to ensure content is not hidden behind the widgets */
+  padding: 20px;
+}
+
+.navbar {
+  margin-bottom: 10px; /* Adjust this value to reduce vertical space between navbar and carousel */
+}
+
+.carousel {
+  margin-bottom: 10px; /* Adjust this value to reduce vertical space between carousel and widgets */
+}

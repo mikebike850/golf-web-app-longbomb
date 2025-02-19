@@ -2,7 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px; /* Add gap between widgets */
+  padding: 20px;
+}
+
+.widgets-container {
+  position: absolute;
+  top: 100px; /* Adjust this value based on the height of your navbar and carousel */
+  right: 20px; /* Adjust this value to position the widgets on the right side */
+  display: flex;
+  flex-direction: column;
   gap: 10px; /* Add gap between widgets */
 }
 
