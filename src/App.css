@@ -1,9 +1,9 @@
-iken/OneDrive/Desktop/golf-web-app-longbomb/src/App.css */
 .app {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 10px; /* Add gap between widgets */
+  gap: 10px; /* Add gap between widgets */
 }
 
 #root {

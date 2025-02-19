@@ -11,7 +11,7 @@ function WeatherWidget() {
 
   const handleSearch = () => {
     // Fetch weather data for the entered location using the proxy
-    fetch(`/api/v1/current.json?key=YOUR_API_KEY&q=${location}`)
+    fetch(`https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=${location}`)
       .then((response) => response.json())
       .then((data) => setWeather(data))
       .catch((error) => console.error("Error fetching weather data:", error));
