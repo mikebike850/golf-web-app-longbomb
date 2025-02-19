@@ -31,3 +31,8 @@
   margin-top: 20px;
   text-align: center;
 }
+
+.weather-error {
+  color: red;
+  margin-top: 10px;
+}
