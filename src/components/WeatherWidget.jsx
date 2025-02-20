@@ -20,7 +20,9 @@ function WeatherWidget() {
     fetch(`https://api.weatherapi.com/v1/current.json?key=${import.meta.env.VITE_WEATHER_API_KEY}&q=${location}`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          return response.json().then((errorData) => {
+            throw new Error(errorData.error.message || "Network response was not ok");
+          });
         }
         return response.json();
       })
@@ -30,7 +32,7 @@ function WeatherWidget() {
       })
       .catch((error) => {
         console.error("Error fetching weather data:", error);
-        setError("Error fetching weather data. Please try again.");
+        setError(error.message || "Error fetching weather data. Please try again.");
       });
   };
 

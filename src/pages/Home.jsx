@@ -1,4 +1,5 @@
 import React from "react";
+import MessageBoard from "../components/MessageBoard";
 import "./Home.css";
 
 function Home() {
@@ -8,7 +9,7 @@ function Home() {
         {/* BackgroundCarousel is now in Layout.jsx */}
       </div>
       <div className="home-bottom">
-        {/* Message Board or other content */}
+        <MessageBoard />
       </div>
     </div>
   );

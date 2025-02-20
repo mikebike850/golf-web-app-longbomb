@@ -1,0 +1,10 @@
+/your-project
+  /public
+    favicon.ico
+  /src
+    /components
+      WeatherWidget.jsx
+    main.jsx
+  .env
+  package.json
+  ...
